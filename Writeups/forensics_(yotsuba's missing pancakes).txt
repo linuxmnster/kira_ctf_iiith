@@ -1,0 +1,19 @@
+# Define Zero-Width Characters
+zero_width_chars = {
+    "\u200b": "0",  # Zero-Width Space (ZWSP)
+    "\u200c": "1",  # Zero-Width Non-Joiner (ZWNJ)
+}
+
+# Load the text file
+with open("riddle.txt", "r", encoding="utf-8") as file:
+    text_content = file.read()
+
+# Extract Zero-Width Characters
+hidden_binary = "".join(zero_width_chars[char] for char in text_content if char in zero_width_chars)
+
+# Convert binary to text if it's valid binary
+if set(hidden_binary) == {"0", "1"} and len(hidden_binary) % 8 == 0:
+    hidden_message = "".join(chr(int(hidden_binary[i:i+8], 2)) for i in range(0, len(hidden_binary), 8))
+    print("Hidden Message:", hidden_message)
+else:
+    print("Could not decode binary text.")

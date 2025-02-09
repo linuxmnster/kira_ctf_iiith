@@ -1,0 +1,1 @@
+use this tool stegsolve.jar to file all the alpha's of an image to find flag
